@@ -19,7 +19,7 @@ public class Account {
     private Long id;
     private String agency;
     private String accountNumber;
-    private AccountType accountType;
+    private String accountType;
     private String Banco;
     @ManyToOne(cascade = CascadeType.PERSIST)
     private AccountOwner accountOwner;
@@ -27,7 +27,7 @@ public class Account {
     private BigDecimal blockedBalance = new BigDecimal("0.0");
 
     public Account(String agency, String accountNumber,
-                   AccountType accountType, String banco,
+                   String accountType, String banco,
                    AccountOwner accountOwner,
                    BigDecimal balance) {
         setAgency(agency);

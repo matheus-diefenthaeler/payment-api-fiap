@@ -13,7 +13,7 @@ public class AccountMapperImpl implements AccountMapper {
         return new Account(
                 request.getAgency(),
                 request.getAccountNumber(),
-                request.getAccountType(),
+                request.getAccountType().getDescription(),
                 request.getBankName(),
                 request.getAccountOwner(),
                 request.getBalance()
