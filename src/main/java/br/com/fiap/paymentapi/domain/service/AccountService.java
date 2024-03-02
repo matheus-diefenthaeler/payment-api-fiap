@@ -76,4 +76,18 @@ public class AccountService implements AccountInput {
         return result.compareTo(BigDecimal.ZERO) >= 0;
     }
 
+    public void blockBalance(Account account, BigDecimal ammount) {
+        account.setBlockedBalance(account.getBlockedBalance().add(ammount));
+        account.setBalance(account.getBalance().subtract(ammount));
+        repository.save(account);
+    }
+
+    public void unblockAmmount(Account account, BigDecimal ammount) {
+
+        account.setBlockedBalance(account.getBlockedBalance().subtract(ammount));
+        account.setBalance(account.getBalance().add(ammount));
+        repository.save(account);
+
+    }
+
 }
