@@ -1,6 +1,7 @@
 package br.com.fiap.paymentapi.adapter.in.controller;
 
 import br.com.fiap.paymentapi.domain.service.AccountService;
+import br.com.fiap.paymentapi.infrastructure.dto.AccountDeppositRequest;
 import br.com.fiap.paymentapi.infrastructure.dto.AccountRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -25,5 +26,11 @@ public class AccountController {
         ResponseEntity<?> byAccount = service.findByAccount(accountNumber);
         return ResponseEntity.ok().body(byAccount);
 
+    }
+
+    @PostMapping("/deposit")
+    public ResponseEntity<?> deposit(@RequestBody AccountDeppositRequest request){
+        service.deposit(request);
+        return ResponseEntity.ok().build();
     }
 }

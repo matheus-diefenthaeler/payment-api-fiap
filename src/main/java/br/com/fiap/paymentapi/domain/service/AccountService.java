@@ -2,6 +2,7 @@ package br.com.fiap.paymentapi.domain.service;
 
 import br.com.fiap.paymentapi.adapter.out.mysql.repository.AccountRepository;
 import br.com.fiap.paymentapi.domain.model.Account;
+import br.com.fiap.paymentapi.infrastructure.dto.AccountDeppositRequest;
 import br.com.fiap.paymentapi.infrastructure.dto.AccountRequest;
 import br.com.fiap.paymentapi.infrastructure.mapper.impl.AccountMapperImpl;
 import br.com.fiap.paymentapi.port.in.AccountInput;
@@ -18,6 +19,10 @@ public class AccountService implements AccountInput {
 
     @Override
     public ResponseEntity<?> create(AccountRequest request) {
+
+        if (isAccountCreated(request.getAccountNumber())) {
+            throw new RuntimeException("Account already registred!");
+        }
         Account account = mapper.requestToModel(request);
         return ResponseEntity.ok().body(repository.save(account));
 
@@ -31,6 +36,25 @@ public class AccountService implements AccountInput {
                 );
 
         return ResponseEntity.ok().body(accountByAccountNumber);
+    }
+
+    @Override
+    public Account findByAccountAndAgency(String account, String agency) {
+        return repository.findAccountByAccountNumberAndAgency(account, agency)
+                .orElseThrow(() -> new RuntimeException("Account not found!")
+                );
+    }
+
+    @Override
+    public void deposit(AccountDeppositRequest request) {
+        Account acc = findByAccountAndAgency(request.getAccountNumber(), request.getAccountAgency());
+        acc.setBalance(acc.getBalance().add(request.getAmmount()));
+        repository.save(acc);
+
+    }
+
+    public Boolean isAccountCreated(String accountNumber) {
+        return repository.findAccountByAccountNumber(accountNumber).isPresent();
     }
 
 }
