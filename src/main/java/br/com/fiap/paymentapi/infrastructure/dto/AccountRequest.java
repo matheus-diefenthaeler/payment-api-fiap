@@ -3,6 +3,7 @@ package br.com.fiap.paymentapi.infrastructure.dto;
 
 import br.com.fiap.paymentapi.domain.model.AccountOwner;
 import br.com.fiap.paymentapi.domain.model.AccountType;
+import br.com.fiap.paymentapi.domain.model.Bank;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
@@ -22,7 +23,7 @@ public class AccountRequest {
     @JsonProperty("account_type")
     private AccountType accountType;
     @JsonProperty("bank_name")
-    private String bankName;
+    private Bank bankName;
     @JsonProperty("account_owner")
     private AccountOwner accountOwner;
     @JsonProperty("balance")

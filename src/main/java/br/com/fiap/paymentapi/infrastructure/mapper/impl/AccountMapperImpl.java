@@ -14,7 +14,7 @@ public class AccountMapperImpl implements AccountMapper {
                 request.getAgency(),
                 request.getAccountNumber(),
                 request.getAccountType().getDescription(),
-                request.getBankName(),
+                request.getBankName().getDescription(),
                 request.getAccountOwner(),
                 request.getBalance()
         );
