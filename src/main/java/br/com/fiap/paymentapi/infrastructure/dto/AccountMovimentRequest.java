@@ -6,7 +6,7 @@ import lombok.Getter;
 import java.math.BigDecimal;
 
 @Getter
-public class AccountDeppositRequest {
+public class AccountMovimentRequest {
 
     @JsonProperty("account_number")
     String accountNumber;

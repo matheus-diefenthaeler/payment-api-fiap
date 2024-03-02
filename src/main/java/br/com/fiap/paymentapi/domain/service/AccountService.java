@@ -2,13 +2,15 @@ package br.com.fiap.paymentapi.domain.service;
 
 import br.com.fiap.paymentapi.adapter.out.mysql.repository.AccountRepository;
 import br.com.fiap.paymentapi.domain.model.Account;
-import br.com.fiap.paymentapi.infrastructure.dto.AccountDeppositRequest;
+import br.com.fiap.paymentapi.infrastructure.dto.AccountMovimentRequest;
 import br.com.fiap.paymentapi.infrastructure.dto.AccountRequest;
 import br.com.fiap.paymentapi.infrastructure.mapper.impl.AccountMapperImpl;
 import br.com.fiap.paymentapi.port.in.AccountInput;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
 
 @Service
 @RequiredArgsConstructor
@@ -46,15 +48,32 @@ public class AccountService implements AccountInput {
     }
 
     @Override
-    public void deposit(AccountDeppositRequest request) {
+    public void deposit(AccountMovimentRequest request) {
         Account acc = findByAccountAndAgency(request.getAccountNumber(), request.getAccountAgency());
         acc.setBalance(acc.getBalance().add(request.getAmmount()));
         repository.save(acc);
 
     }
 
+    @Override
+    public void withdraw(AccountMovimentRequest request) {
+        Account acc = findByAccountAndAgency(request.getAccountNumber(), request.getAccountAgency());
+        if (!hasBalance(request.getAmmount(), acc.getBalance())) {
+            throw new RuntimeException("Not enough balance to withdraw.");
+        }
+
+        acc.setBalance(acc.getBalance().subtract(request.getAmmount()));
+        repository.save(acc);
+
+    }
+
     public Boolean isAccountCreated(String accountNumber) {
         return repository.findAccountByAccountNumber(accountNumber).isPresent();
+    }
+
+    public boolean hasBalance(BigDecimal amount, BigDecimal balance) {
+        BigDecimal result = balance.subtract(amount);
+        return result.compareTo(BigDecimal.ZERO) >= 0;
     }
 
 }
