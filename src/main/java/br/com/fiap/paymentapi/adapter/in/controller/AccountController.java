@@ -4,10 +4,7 @@ import br.com.fiap.paymentapi.domain.service.AccountService;
 import br.com.fiap.paymentapi.infrastructure.dto.AccountRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -21,5 +18,12 @@ public class AccountController {
 
         ResponseEntity<?> responseEntity = service.create(request);
         return ResponseEntity.ok().body(responseEntity);
+    }
+
+    @GetMapping("/{accountNumber}")
+    public ResponseEntity<?> findByAccount(@PathVariable String accountNumber){
+        ResponseEntity<?> byAccount = service.findByAccount(accountNumber);
+        return ResponseEntity.ok().body(byAccount);
+
     }
 }

@@ -23,4 +23,14 @@ public class AccountService implements AccountInput {
 
     }
 
+    @Override
+    public ResponseEntity<?> findByAccount(String accountNumber) {
+
+        Account accountByAccountNumber = repository.findAccountByAccountNumber(accountNumber)
+                .orElseThrow(() -> new RuntimeException("Not found!")
+                );
+
+        return ResponseEntity.ok().body(accountByAccountNumber);
+    }
+
 }

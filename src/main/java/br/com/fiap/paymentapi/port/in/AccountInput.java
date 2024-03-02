@@ -6,4 +6,5 @@ import org.springframework.http.ResponseEntity;
 public interface AccountInput {
 
     ResponseEntity<?> create(AccountRequest request);
+    ResponseEntity<?> findByAccount(String account);
 }
