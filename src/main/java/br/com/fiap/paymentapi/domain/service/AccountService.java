@@ -26,6 +26,7 @@ public class AccountService implements AccountInput {
             throw new RuntimeException("Account already registred!");
         }
         Account account = mapper.requestToModel(request);
+//        account.setAccountOwnerName(request.getAccountOwner().getName());
         return ResponseEntity.ok().body(repository.save(account));
 
     }
@@ -75,19 +76,4 @@ public class AccountService implements AccountInput {
         BigDecimal result = balance.subtract(amount);
         return result.compareTo(BigDecimal.ZERO) >= 0;
     }
-
-    public void blockBalance(Account account, BigDecimal ammount) {
-        account.setBlockedBalance(account.getBlockedBalance().add(ammount));
-        account.setBalance(account.getBalance().subtract(ammount));
-        repository.save(account);
-    }
-
-    public void unblockAmmount(Account account, BigDecimal ammount) {
-
-        account.setBlockedBalance(account.getBlockedBalance().subtract(ammount));
-        account.setBalance(account.getBalance().add(ammount));
-        repository.save(account);
-
-    }
-
 }

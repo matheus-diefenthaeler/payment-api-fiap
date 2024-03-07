@@ -23,20 +23,22 @@ public class Account {
     private String Banco;
     @ManyToOne(cascade = CascadeType.PERSIST)
     private AccountOwner accountOwner;
+    private String accountOwnerName;
     private BigDecimal balance;
     private BigDecimal blockedBalance = new BigDecimal("0.0");
 
     public Account(String agency, String accountNumber,
                    String accountType, String banco,
                    AccountOwner accountOwner,
+                   String accountOwnerName,
                    BigDecimal balance) {
         setAgency(agency);
         setAccountNumber(accountNumber);
         setAccountType(accountType);
         setAccountOwner(accountOwner);
         setBanco(banco);
+        setAccountOwnerName(accountOwnerName);
         setBalance(balance);
 
     }
-
 }
