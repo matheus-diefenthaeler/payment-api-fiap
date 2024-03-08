@@ -4,7 +4,7 @@ import br.com.fiap.paymentapi.adapter.out.mysql.repository.AccountRepository;
 import br.com.fiap.paymentapi.adapter.out.mysql.repository.TransactionRepository;
 import br.com.fiap.paymentapi.domain.model.Account;
 import br.com.fiap.paymentapi.domain.model.Transaction;
-import br.com.fiap.paymentapi.infrastructure.dto.PaymentRequest;
+import br.com.fiap.paymentapi.infrastructure.dto.request.PaymentRequest;
 import br.com.fiap.paymentapi.infrastructure.dto.response.TransactionResponse;
 import br.com.fiap.paymentapi.infrastructure.mapper.TransactionMapper;
 import br.com.fiap.paymentapi.port.in.PaymentInput;

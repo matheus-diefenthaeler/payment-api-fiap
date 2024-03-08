@@ -1,4 +1,4 @@
-package br.com.fiap.paymentapi.infrastructure.dto;
+package br.com.fiap.paymentapi.infrastructure.dto.request;
 
 
 import br.com.fiap.paymentapi.domain.model.AccountOwner;

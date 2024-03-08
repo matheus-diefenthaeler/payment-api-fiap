@@ -1,8 +1,8 @@
 package br.com.fiap.paymentapi.adapter.in.controller;
 
 import br.com.fiap.paymentapi.domain.service.AccountService;
-import br.com.fiap.paymentapi.infrastructure.dto.AccountMovimentRequest;
-import br.com.fiap.paymentapi.infrastructure.dto.AccountRequest;
+import br.com.fiap.paymentapi.infrastructure.dto.request.AccountMovimentRequest;
+import br.com.fiap.paymentapi.infrastructure.dto.request.AccountRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

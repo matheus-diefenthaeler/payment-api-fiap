@@ -1,7 +1,7 @@
 package br.com.fiap.paymentapi.infrastructure.mapper.impl;
 
 import br.com.fiap.paymentapi.domain.model.Account;
-import br.com.fiap.paymentapi.infrastructure.dto.AccountRequest;
+import br.com.fiap.paymentapi.infrastructure.dto.request.AccountRequest;
 import br.com.fiap.paymentapi.infrastructure.mapper.AccountMapper;
 import org.springframework.stereotype.Component;
 

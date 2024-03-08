@@ -16,13 +16,17 @@ public class TransactionResponse {
     @JsonProperty("transaction_id")
     private Long id;
     @JsonProperty("date")
-    private LocalDateTime date;
+    private String date;
     @JsonProperty("total_ammount")
     private BigDecimal totalAmmount;
     @JsonProperty("origin_account")
     private String originAccount;
+    @JsonProperty("origin_agency")
+    private String originAgency;
     @JsonProperty("target_account")
     private String targetAccount;
+    @JsonProperty("target_agency")
+    private String targetAgency;
     @JsonProperty("target_account_name")
     private String targetAccountName;
     @JsonProperty("status")

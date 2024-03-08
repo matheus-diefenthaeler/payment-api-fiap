@@ -2,8 +2,9 @@ package br.com.fiap.paymentapi.domain.service;
 
 import br.com.fiap.paymentapi.adapter.out.mysql.repository.AccountRepository;
 import br.com.fiap.paymentapi.domain.model.Account;
-import br.com.fiap.paymentapi.infrastructure.dto.AccountMovimentRequest;
-import br.com.fiap.paymentapi.infrastructure.dto.AccountRequest;
+import br.com.fiap.paymentapi.exception.AccountNotFoundException;
+import br.com.fiap.paymentapi.infrastructure.dto.request.AccountMovimentRequest;
+import br.com.fiap.paymentapi.infrastructure.dto.request.AccountRequest;
 import br.com.fiap.paymentapi.infrastructure.mapper.impl.AccountMapperImpl;
 import br.com.fiap.paymentapi.port.in.AccountInput;
 import lombok.RequiredArgsConstructor;
@@ -35,7 +36,7 @@ public class AccountService implements AccountInput {
     public ResponseEntity<?> findByAccount(String accountNumber) {
 
         Account accountByAccountNumber = repository.findAccountByAccountNumber(accountNumber)
-                .orElseThrow(() -> new RuntimeException("Not found!")
+                .orElseThrow(() -> new AccountNotFoundException("Account number: '" + accountNumber + "' Not found!")
                 );
 
         return ResponseEntity.ok().body(accountByAccountNumber);

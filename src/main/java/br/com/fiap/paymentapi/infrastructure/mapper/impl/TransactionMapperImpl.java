@@ -1,7 +1,7 @@
 package br.com.fiap.paymentapi.infrastructure.mapper.impl;
 
 import br.com.fiap.paymentapi.domain.model.Transaction;
-import br.com.fiap.paymentapi.infrastructure.dto.PaymentRequest;
+import br.com.fiap.paymentapi.infrastructure.dto.request.PaymentRequest;
 import br.com.fiap.paymentapi.infrastructure.dto.response.TransactionResponse;
 import br.com.fiap.paymentapi.infrastructure.mapper.TransactionMapper;
 import org.springframework.stereotype.Component;
@@ -15,7 +15,9 @@ public class TransactionMapperImpl implements TransactionMapper {
                 transaction.getDate(),
                 transaction.getTotalAmmount(),
                 transaction.getOriginAccount(),
+                transaction.getOriginAgency(),
                 transaction.getTargetAccount(),
+                transaction.getTargetAgency(),
                 transaction.getTargetAccountName(),
                 transaction.getStatus()
         );
@@ -25,6 +27,8 @@ public class TransactionMapperImpl implements TransactionMapper {
     public Transaction requestToModel(PaymentRequest request) {
         return new Transaction(request.getAmmount(),
                 request.getOriginAccountNumber(),
-                request.getTargetAccountNumber());
+                request.getOriginAccountAgency(),
+                request.getTargetAccountNumber(),
+                request.getTargetAccountAgency());
     }
 }
